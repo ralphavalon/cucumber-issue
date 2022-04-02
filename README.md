@@ -84,3 +84,13 @@ Caused by: java.lang.NoSuchMethodException: com.demo.project.DemoParentSteps.<in
         at io.cucumber.core.backend.DefaultObjectFactory.cacheNewInstance(DefaultObjectFactory.java:52)
         ... 37 more
 ```
+
+#### Possible Solutions
+
+* Using the `metaInf-services` from [Container Descriptor Handlers](https://maven.apache.org/plugins/maven-assembly-plugin/examples/single/using-container-descriptor-handlers.html)
+This will allow the META-INF/services/io.cucumber.core.backend.ObjectFactory from both cucumber-core and cucumber-pico to me merged and result in
+```
+io.cucumber.core.backend.DefaultObjectFactory
+io.cucumber.picocontainer.PicoFactory
+```
+This definition will allow to use the PicoFactory which supports multiple args constructor instead of DefaultObjectFactory which expects zero rags constructor.
